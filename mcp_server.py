@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Optional, List
 import os
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
 # Initialize FastMCP Server
 mcp = FastMCP("Sales-Prospector-Pro")
