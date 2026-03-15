@@ -10,5 +10,8 @@
     }
   },
   "capabilities": ["research", "lead-gen"],
-  "pricing": "Pay-per-use"
+  "pricing": "Pay-per-use",
+  "privacy_policy_url": "https://github.com/Bristo/sales-agent-pro/blob/main/PRIVACY.md",
+  "license": "MIT",
+  "license_url": "https://github.com/Bristo/sales-agent-pro/blob/main/LICENSE"
 }
