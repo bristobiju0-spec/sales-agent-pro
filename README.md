@@ -17,7 +17,7 @@ Bristo Sales Prospector is an MCP (Model Context Protocol) server that empowers 
 Run this command in your terminal to add the agent to your Claude environment:
 
 ```bash
-claude mcp add sales-pro --transport http https://sales-pro.mcp.xpay.sh/mcp
+claude mcp add sales-pro --transport http https://sales-pro.mcp.xpay.sh/
 ```
 
 ## 💡 How to Use

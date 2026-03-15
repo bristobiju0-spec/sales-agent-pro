@@ -3,6 +3,8 @@ import logging
 from typing import Optional, List
 import os
 from fastmcp import FastMCP
+from fastapi import FastAPI
+import uvicorn
 
 # Initialize FastMCP Server with the 'sales-pro' slug
 mcp = FastMCP("sales-pro")
@@ -10,6 +12,14 @@ mcp = FastMCP("sales-pro")
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("sales-pro-gen")
+
+@mcp.tool()
+def healthz() -> str:
+    """
+    Check the health of the MCP server.
+    Use this to verify connectivity through the proxy.
+    """
+    return "OK"
 
 @mcp.tool()
 def research_prospect(name: str, company: Optional[str] = None) -> str:
@@ -93,11 +103,9 @@ if __name__ == "__main__":
     # Render uses port 10000 by default, but we use os.getenv for flexibility
     port = int(os.getenv("PORT", 10000))
     
-    logger.info(f"Starting Sales-Prospector-Pro MCP Server on port {port} using HTTP transport...")
+    logger.info(f"Starting sales-pro MCP Server on port {port} at root path (/)")
     
-    # We use 'http' transport for Render Web Service compatibility
-    mcp.run(
-        transport="http",
-        host="0.0.0.0",
-        port=port
-    )
+    app = FastAPI()
+    mcp.mount(app, path="/")
+    
+    uvicorn.run(app, host="0.0.0.0", port=port)
