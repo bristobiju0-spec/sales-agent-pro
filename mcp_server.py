@@ -80,6 +80,13 @@ def sales_pro(company_name: str) -> str:
 
 app = FastAPI()
 
+@app.get("/")
+async def root():
+    """
+    Root diagnostic route for browser verification.
+    """
+    return {"mcp": "active"}
+
 @app.get("/health")
 async def health():
     """
