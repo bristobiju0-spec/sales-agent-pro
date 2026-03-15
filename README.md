@@ -1,36 +1,50 @@
-# Bristo Sales Prospector
+# 🚀 Bristo Sales Prospector
+**The Autonomous Lead Research Agent for Claude.**
 
-An autonomous agent for deep-researching B2B leads. Finds HQ, employee counts, and funding data.
+Bristo Sales Prospector is an MCP (Model Context Protocol) server that empowers Claude to perform deep, real-time research on B2B prospects and companies. It eliminates manual "tab-hunting" by pulling firmographics, funding data, and strategic priorities directly into your chat.
 
-## Overview
+---
 
-Bristo Sales Prospector is an MCP-based agent designed to streamline sales outreach by providing high-quality, actionable research on prospects and companies.
+## 🛠 Features
+- **Deep Prospecting:** Get instant summaries on individuals (roles, skills, focus).
+- **Company Intelligence:** Fetch real-time data on HQ locations, employee counts, and 2026 strategic AI roadmaps.
+- **Autonomous Research:** Claude can decide *when* to use this tool based on your sales-related questions.
+- **Cloud Hosted:** High availability via Render SSE transport.
 
-## Features
+---
 
-- **Prospect Research**: Get detailed summaries of individual prospects, including their current role, key skills, and contact probability.
-- **Company Strategic Focus**: Understand a company's 2026 AI roadmap and strategic priorities to tailor your pitch.
-- **MCP Integration**: Compatible with any MCP client (like Claude Desktop).
+## 🚀 Quick Install (Claude Code / Desktop)
+Run this command in your terminal to add the agent to your Claude environment:
 
-## Getting Started
+```bash
+claude mcp add sales-pro --transport http https://sales-agent-pro.onrender.com/sse
+```
 
-1. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 💡 How to Use
 
-2. **Run the Server**:
-   ```bash
-   python mcp_server.py
-   ```
+Once installed, you don't need special commands. Just ask Claude naturally:
 
-3. **Try the Demo**:
-   Open `demo.html` in your browser for an interactive experience.
+> "Research NVIDIA and tell me if they are a good lead for an AI infrastructure company."
 
-## Claude Plugin Manifest
+> "I'm meeting with the CEO of Tesla tomorrow. Give me a 1-page research summary."
 
-The plugin manifest is located in `.claude-plugin/plugin.json`.
+> "Find the employee count and recent funding for Anthropic."
 
-## Author
+## 🏗 Repository Structure
 
-Bristo
+- **`.claude-plugin/`**: Official marketplace metadata and `plugin.json`.
+- **`agents/`**: Contains `SKILL.md` which defines the agent's behavior and personality.
+- **`mcp_server.py`**: The core Python engine (FastMCP) hosted on Render.
+- **`demo.html`**: A local playground to test the server connection.
+
+## 🔒 Privacy & Security
+
+- **Data Usage**: This agent only accesses public company information.
+- **No Storage**: We do not store your lead lists or chat history.
+- **Transport**: All communication is handled via secure SSE (Server-Sent Events).
+
+---
+
+## 👨💻 Author
+
+**Bristo** – Building the future of AI-driven sales.
