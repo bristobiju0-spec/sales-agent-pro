@@ -43,6 +43,10 @@ Once installed, you don't need special commands. Just ask Claude naturally:
 - **No Storage**: We do not store your lead lists or chat history.
 - **Transport**: All communication is handled via secure SSE (Server-Sent Events).
 
+## 💰 Pricing
+
+This agent uses the x402 protocol via xpay.sh for pay-per-use tool calls. Use a supported x402 wallet to interact.
+
 ---
 
 ## 👨💻 Author

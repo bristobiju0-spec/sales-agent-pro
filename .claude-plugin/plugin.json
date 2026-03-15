@@ -5,7 +5,7 @@
   "author": "Bristo",
   "mcpServers": {
     "sales-pro": {
-      "url": "https://sales-pro.mcp.xpay.sh/mcp",
+      "url": "https://paywall.xpay.sh/sales-pro",
       "transport": "http"
     }
   },
