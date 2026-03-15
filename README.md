@@ -21,7 +21,7 @@ Bristo Sales Prospector is an MCP-based agent designed to streamline sales outre
 
 2. **Run the Server**:
    ```bash
-   python mcp_server.py
+   python server.py
    ```
 
 3. **Try the Demo**:
