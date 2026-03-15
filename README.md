@@ -17,7 +17,7 @@ Bristo Sales Prospector is an MCP (Model Context Protocol) server that empowers 
 Run this command in your terminal to add the agent to your Claude environment:
 
 ```bash
-claude mcp add sales-pro --transport http https://sales-agent-pro.onrender.com/sse
+claude mcp add sales-pro --transport http https://sales-pro.mcp.xpay.sh/mcp
 ```
 
 ## 💡 How to Use
@@ -46,6 +46,8 @@ Once installed, you don't need special commands. Just ask Claude naturally:
 ## 💰 Pricing
 
 This agent uses the x402 protocol via xpay.sh for pay-per-use tool calls. Use a supported x402 wallet to interact.
+
+**Paywall Link**: [https://paywall.xpay.sh/sales-pro](https://paywall.xpay.sh/sales-pro)
 
 ---
 
