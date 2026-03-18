@@ -5,6 +5,9 @@ import os
 from fastmcp import FastMCP
 from fastapi import FastAPI
 import uvicorn
+import asyncio
+from agents.vision_specialist import VisionSpecialist
+from agents.compliance_filing_agent import ComplianceFilingAgent
 
 # Initialize FastMCP Server with lowercase 'sales-pro' slug
 # The name here is used for logging and internal identification
@@ -75,6 +78,59 @@ def sales_pro(company_name: str) -> str:
             "Market Position: Leading in pervasive integration and agentic capabilities across Workspace and Android."
         )
     return f"Researching {company_name}... Found: HQ in SF, 500 employees, recently focused on scaling AI infrastructure."
+
+@mcp.tool()
+async def process_hvac_compliance_pro(equipment_image_b64: str, roof_image_b64: Optional[str] = None) -> str:
+    """
+    Refined Agent Manager Workflow:
+    1. Runs Vision-to-Spec Auditor (Agent 1) to extract 2026 metrics & check Heat Pump mandate. 
+    2. Vision Agent writes site_specs.json.
+    3. Runs Compliance & Filing Agent (Agent 2) to check JA18 locks and simulate browser filing.
+    4. Agents are designed to run in parallel where dependencies allow.
+    """
+    logger.info("Starting Refined HVAC Dual-Agent Workflow...")
+    
+    auditor = VisionSpecialist()
+    filer = ComplianceFilingAgent()
+    
+    # Step 1: Run Auditor (Agent 1)
+    # In a real async environment, we could gather multiple extractions
+    try:
+        audit_result = auditor.auditor_workflow(equipment_image_b64, roof_image_b64)
+    except Exception as e:
+        logger.error(f"Auditor failed: {str(e)}")
+        return f"Agent 1 Error: {str(e)}"
+
+    # Step 2: Run Filer (Agent 2) - Ingests site_specs.json
+    try:
+        filing_result = filer.filer_workflow()
+    except Exception as e:
+        logger.error(f"Filer failed: {str(e)}")
+        return f"Agent 2 Error: {str(e)}"
+    
+    # Step 3: Synthesis
+    specs = audit_result["site_specs"]
+    summary = (
+        "🏗️ Refined HVAC Compliance & Filing Summary\n"
+        "==========================================\n"
+        f"Manufacturer: {specs.get('manufacturer')} | Model: {specs.get('model_number')}\n"
+        f"2026 Metrics: SEER2={specs.get('seer2')}, EER2={specs.get('eer2')}, HSPF2={specs.get('hspf2')}\n"
+        "------------------------------------------\n"
+        "🛡️ Compliance Audit (Agent 1):\n"
+        f"- Heat Pump Mandate: {'✅ OK' if audit_result['compliance_audit']['is_compliant'] else '⚠️ WARNING'}\n"
+        f"  Note: {audit_result['compliance_audit']['note']}\n"
+        f"- SARA Estimate: {audit_result['sara_assessment']['estimated_sara_sqft']} sqft\n"
+        "------------------------------------------\n"
+        "📂 Filing & Regulatory (Agent 2):\n"
+        f"- JA18 Logic Lock: {'✅ VERIFIED' if filing_result['ja18_compliance']['is_locked'] else '❌ MISSING'}\n"
+        f"  Note: {filing_result['ja18_compliance']['note']}\n"
+        f"- Filing Status: {filing_result['filing_status']['status']} ({filing_result['filing_status']['portal']})\n"
+        "------------------------------------------\n"
+        "✅ Workflow Complete. site_specs.json generated and forms populated.\n"
+        "Review Screenshot: [Ready_to_Submit_Artifact](file:///tmp/filing_screenshot.png)"
+    )
+    
+    return summary
 
 # --- FastAPI Integration & Deployment ---
 
